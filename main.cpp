@@ -5,6 +5,19 @@
 
 using namespace std;
 
+//Op code Macro
+// R-type instruction
+#define RTypeOpCode 0   //R-type inst Opp code
+#define addFunCode 32   //Add function code
+#define subFunCode 34   //Sub function code
+#define sltFunCode 42   //Set less than function code
+// I-type instruction
+#define ldrWOpCode 35   //Load word Opp Code
+#define strWOpCode 43   //Store word Opp Code
+#define addImdOpCode 8  //Add immediate Opp code
+#define beOpCode 4      //Branch in equal Opp Code
+#define bneOpCode 5     //Branch not equal Opp Code
+
 ///Global Variable
 int R[32];
 int Mem[249];
@@ -125,21 +138,80 @@ void RegMemCodeReading(vector<string> str){
         int value = *in;
         cout << "Memory location " << value << " holds the value = " << Mem[value/4] << endl;
     }
-    string opp;
+    string oppStr;
+    string funStr;
     ///reading in code
+<<<<<<< Updated upstream
+=======
+    int instrNum = 1; // Instruction number increments by 1 for each operation
+    int cycleNum = 1; // Will increment by one for each cycle e.g. C#1 I1-IF
+    int opCdInt;
+    int funcodeint;
+>>>>>>> Stashed changes
     for(i=codeloc+1; i<str.size(); ++i){
-        cout << str[i] << endl;
         tempStr = str[i];
-        opp = tempStr.substr(0,6);
-        cout << "opp code:" << opp << endl;
-        if(opp == "000000"){
-            cout << "R-type instruction. " << endl;
+        cout << i << endl;
+        //cout << tempStr << endl;
+        oppStr = tempStr.substr(0,6);   //reading the  1st 6 bit oppcode
+        opCdInt = stoi(oppStr,nullptr,2);
+        //cout << "op code: " << oppStr << ":" <<opCdInt << endl;
+        funStr = tempStr.substr(25,31);
+        funcodeint = stoi(funStr,nullptr,2);
+        string retStr;
+        switch(opCdInt){
+            case RTypeOpCode:
+                //cout << "R-type instruction. " << endl;
+                switch(funcodeint){
+                    case addFunCode:
+                        cout << "R-Type Add function" << endl;
+                        retStr = OpCodeAdd(tempStr,&i, &cycleNum, &instrNum);
+                        cout << retStr << endl;
+                        break;
+                    case subFunCode:
+                        cout << "R-Type Sub function" << endl;
+                        break;
+                    case sltFunCode:
+                        cout << "R-Type Shift Logic Left function" << endl;
+                        break;
+                }
+                break;
+            case ldrWOpCode:
+                cout << "Load word instruction " << endl;
+                break;
+            case strWOpCode:
+                cout << "Store word instruction " << endl;
+                break;
+            case addImdOpCode:
+                cout << "Add immediate instruction " << endl;
+                break;
+            case beOpCode:
+                cout << "Branch if equal instruction " << endl;
+                break;
+            case bneOpCode:
+                cout << "Branch if not equal instruction " << endl;
+                break;
         }
-        else if(opp == "000010" || opp == "000011"){
-            cout << "J-type instrction. " << endl;
-        }
-        else{
-            cout << "I- type instrction. " << endl;
-        }
+
     }
 }
+<<<<<<< Updated upstream
+=======
+
+string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int&instrNum)
+{
+    int rs = stoi(codeLine.substr(6, 5), 0, 2);
+    int rt = stoi(codeLine.substr(11, 5), 0, 2);
+    int rd = stoi(codeLine.substr(16, 5), 0, 2);
+    ostringstream  outSS;
+
+    R[rd] = R[rs] + R[rt];
+
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-IF" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-ID" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-EX" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-WB" << endl;
+    *instrNum++;
+
+    return outSS.str();
+}
+>>>>>>> Stashed changes
