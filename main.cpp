@@ -160,7 +160,7 @@ string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int&instrNum)
     outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-ID" << endl;
     outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-EX" << endl;
     outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-WB" << endl;
-    insNum++;
+    instrNum++;
     
     return outSS.str();
 }
