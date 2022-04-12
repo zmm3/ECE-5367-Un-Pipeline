@@ -127,6 +127,9 @@ void RegMemCodeReading(vector<string> str){
     }
     string opp;
     ///reading in code
+    int instrNum = 1; // Instruction number increments by 1 for each operation
+    int cycleNum = 1; // Will increment by one for each cycle e.g. C#1 I1-IF
+
     for(i=codeloc+1; i<str.size(); ++i){
         cout << str[i] << endl;
         tempStr = str[i];
@@ -144,19 +147,19 @@ void RegMemCodeReading(vector<string> str){
     }
 }
 
-string OpCodeAdd(vector<string> str, int& PCaddr, int& cycleNum, int&insNum)
+string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int&instrNum)
 {
-    int rs = stoi(str[PCaddr].substr(6, 5), 0, 2);
-    int rt = stoi(str[PCaddr].substr(11, 5), 0, 2);
-    int rd = stoi(str[PCaddr].substr(16, 5), 0, 2);
+    int rs = stoi(codeLine.substr(6, 5), 0, 2);
+    int rt = stoi(codeLine.substr(11, 5), 0, 2);
+    int rd = stoi(codeLine.substr(16, 5), 0, 2);
     ostringstream = outSS;
 
     R[rd] = R[rs] + R[rt];
     
-    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-IF" << endl;
-    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-ID" << endl;
-    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-EX" << endl;
-    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-WB" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-IF" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-ID" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-EX" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-WB" << endl;
     insNum++;
     
     return outSS.str();
