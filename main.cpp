@@ -2,6 +2,7 @@
 #include<string>
 #include<vector>
 #include<fstream>
+#include<sstream>
 
 using namespace std;
 
@@ -33,8 +34,7 @@ vector <int> MemSloc;
 void RegMemCodeReading(vector<string> s);   //INPUT: gets sting vector as argument
                                             //OUTPUT: value inserted to the corresponding memory location index in
                                                     //R[#], Mem[#}, and MemSloc<intVec>
-
-
+string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int& instrNum);
 /// delete only for testing function
 
 ///
@@ -141,31 +141,25 @@ void RegMemCodeReading(vector<string> str){
     string oppStr;
     string funStr;
     ///reading in code
-<<<<<<< Updated upstream
-=======
     int instrNum = 1; // Instruction number increments by 1 for each operation
     int cycleNum = 1; // Will increment by one for each cycle e.g. C#1 I1-IF
     int opCdInt;
     int funcodeint;
->>>>>>> Stashed changes
     for(i=codeloc+1; i<str.size(); ++i){
         tempStr = str[i];
-        cout << i << endl;
-        //cout << tempStr << endl;
         oppStr = tempStr.substr(0,6);   //reading the  1st 6 bit oppcode
         opCdInt = stoi(oppStr,nullptr,2);
-        //cout << "op code: " << oppStr << ":" <<opCdInt << endl;
         funStr = tempStr.substr(25,31);
         funcodeint = stoi(funStr,nullptr,2);
         string retStr;
         switch(opCdInt){
             case RTypeOpCode:
-                //cout << "R-type instruction. " << endl;
                 switch(funcodeint){
                     case addFunCode:
                         cout << "R-Type Add function" << endl;
-                        retStr = OpCodeAdd(tempStr,&i, &cycleNum, &instrNum);
-                        cout << retStr << endl;
+                        ///code to get the subroutine place here
+                        //retStr = OpCodeAdd(tempStr,&i, &cycleNum, &instrNum);
+                        //cout << retStr << endl;
                         break;
                     case subFunCode:
                         cout << "R-Type Sub function" << endl;
@@ -194,24 +188,21 @@ void RegMemCodeReading(vector<string> str){
 
     }
 }
-<<<<<<< Updated upstream
-=======
 
-string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int&instrNum)
-{
-    int rs = stoi(codeLine.substr(6, 5), 0, 2);
-    int rt = stoi(codeLine.substr(11, 5), 0, 2);
-    int rd = stoi(codeLine.substr(16, 5), 0, 2);
-    ostringstream  outSS;
-
-    R[rd] = R[rs] + R[rt];
-
-    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-IF" << endl;
-    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-ID" << endl;
-    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-EX" << endl;
-    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-WB" << endl;
-    *instrNum++;
-
-    return outSS.str();
-}
->>>>>>> Stashed changes
+//string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int&instrNum)
+//{
+//    int rs = stoi(codeLine.substr(6, 5), 0, 2);
+//    int rt = stoi(codeLine.substr(11, 5), 0, 2);
+//    int rd = stoi(codeLine.substr(16, 5), 0, 2);
+//    ostringstream  outSS;
+//
+//    R[rd] = R[rs] + R[rt];
+//
+//    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-IF" << endl;
+//    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-ID" << endl;
+//    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-EX" << endl;
+//    outSS << "C#" << cycleNum++ << " " << "I" << instrNum << "-WB" << endl;
+//    *instrNum++;
+//
+//    return outSS.str();
+//}
