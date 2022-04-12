@@ -152,7 +152,7 @@ string OpCodeAdd(string codeLine, int& PCaddr, int& cycleNum, int&instrNum)
     int rs = stoi(codeLine.substr(6, 5), 0, 2);
     int rt = stoi(codeLine.substr(11, 5), 0, 2);
     int rd = stoi(codeLine.substr(16, 5), 0, 2);
-    ostringstream = outSS;
+    ostringstream outSS;
 
     R[rd] = R[rs] + R[rt];
     
