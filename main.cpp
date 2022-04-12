@@ -99,6 +99,10 @@ void RegMemCodeReading(vector<string> str){
         regMemVal = stoi(tempstr1,0);    //getting the register value and converting to int
         R[regMemNum] = regMemVal;    //storing the value to the register #
     }
+    ///Printing out the register value
+    for(i=0;i<32;i++){
+        cout << "R[" << i << "] = " << R[i] << endl;
+    }
 
 
     ///getting the memory location value
@@ -110,13 +114,26 @@ void RegMemCodeReading(vector<string> str){
         regMemVal = stoi(tempstr1);
         Mem[regMemNum/4] = regMemVal;   //memory index is memory location/4; as int_32 requires 4 byte(8 bit)
     }
-
+    ///printing out the memory value
     for(vector<int>::iterator in = MemSloc.begin(); in != MemSloc.end(); ++in){
         int value = *in;
         cout << "Memory location " << value << " holds the value = " << Mem[value/4] << endl;
     }
-
-    for(i=0;i<32;i++){
-        cout << "R[" << i << "] = " << R[i] << endl;
+    string opp;
+    ///reading in code
+    for(i=codeloc+1; i<str.size(); ++i){
+        cout << str[i] << endl;
+        tempStr = str[i];
+        opp = tempStr.substr(0,6);
+        cout << "opp code:" << opp << endl;
+        if(opp == "000000"){
+            cout << "R-type instruction. " << endl;
+        }
+        else if(opp == "000010" || opp == "000011"){
+            cout << "J-type instrction. " << endl;
+        }
+        else{
+            cout << "I- type instrction. " << endl;
+        }
     }
 }
