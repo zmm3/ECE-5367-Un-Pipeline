@@ -2,6 +2,7 @@
 #include<string>
 #include<vector>
 #include<fstream>
+#include<sstream>
 
 using namespace std;
 
@@ -20,8 +21,7 @@ vector <int> MemSloc;
 void RegMemCodeReading(vector<string> s);   //INPUT: gets sting vector as argument
                                             //OUTPUT: value inserted to the corresponding memory location index in
                                                     //R[#], Mem[#}, and MemSloc<intVec>
-
-
+string OpCodeAdd(vector<string> str, int& PCaddr, int& cycleNum, int& insNum);
 /// delete only for testing function
 
 ///
@@ -142,4 +142,22 @@ void RegMemCodeReading(vector<string> str){
             cout << "I- type instrction. " << endl;
         }
     }
+}
+
+string OpCodeAdd(vector<string> str, int& PCaddr, int& cycleNum, int&insNum)
+{
+    int rs = stoi(str[PCaddr].substr(6, 5), 0, 2);
+    int rt = stoi(str[PCaddr].substr(11, 5), 0, 2);
+    int rd = stoi(str[PCaddr].substr(16, 5), 0, 2);
+    ostringstream = outSS;
+
+    R[rd] = R[rs] + R[rt];
+    
+    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-IF" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-ID" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-EX" << endl;
+    outSS << "C#" << cycleNum++ << " " << "I" << insNum << "-WB" << endl;
+    insNum++;
+    
+    return outSS.str();
 }
