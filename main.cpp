@@ -143,8 +143,10 @@ void RegMemCodeReading(vector<string> str){
     ///reading in code
     int instrNum = 1; // Instruction number increments by 1 for each operation
     int cycleNum = 1; // Will increment by one for each cycle e.g. C#1 I1-IF
+  
     int opCdInt;
     int funcodeint;
+
     for(i=codeloc+1; i<str.size(); ++i){
         tempStr = str[i];
         oppStr = tempStr.substr(0,6);   //reading the  1st 6 bit oppcode
@@ -206,3 +208,4 @@ void RegMemCodeReading(vector<string> str){
 //
 //    return outSS.str();
 //}
+
