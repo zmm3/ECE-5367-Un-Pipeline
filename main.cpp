@@ -114,7 +114,7 @@ void RegMemCodeReading(vector<string> str){
     ///getting the memory location value
     for(i=memloc+1; i<codeloc; i++){
         tempStr = str[i];   //storing in temp string
-        regMemNum = stoi(tempstr1);
+        regMemNum = stoi(tempStr);
         MemSloc.push_back(regMemNum);   //storing the memory location # in MemSloc vector
         tempstr1 = str[++i];
         regMemVal = stoi(tempstr1);
