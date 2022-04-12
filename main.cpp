@@ -21,7 +21,7 @@ vector <int> MemSloc;
 void RegMemCodeReading(vector<string> s);   //INPUT: gets sting vector as argument
                                             //OUTPUT: value inserted to the corresponding memory location index in
                                                     //R[#], Mem[#}, and MemSloc<intVec>
-string OpCodeAdd(vector<string> str, int& PCaddr, int& cycleNum, int& insNum);
+string OpCodeAdd(vector<string> str, int& PCaddr, int& cycleNum, int& instrNum);
 /// delete only for testing function
 
 ///
