@@ -90,12 +90,18 @@ void RegMemCodeReading(vector<string> str){
     int regMemVal; //stores the register memory value
 
     ///getting the register value
+    ///format style
+    ///R#   #!#
+    ///str[i] = R#  1st vector
+    ///str[++i] = #!#   2nd vector
     for(i=regloc+1; i<memloc; i++){   //finds the regloc and goes through till memloc
         tempStr = str[i];   //storing in a temp string
+                            //first vector stores the R#
         size_t locR = tempStr.find('R');    //finding the location of R in the string
         size_t locSpace = tempStr.size();   //finding the end of the string
         regMemNum = stoi(tempStr.substr(++locR,locSpace)); //separating the # from R# and converting to int
-        tempstr1 = str[++i];    //loading the value in another temp string
+        tempstr1 = str[++i];    //loading the value in another temp string4
+                                //2nd vector stores the # to be stored in the register
         regMemVal = stoi(tempstr1,0);    //getting the register value and converting to int
         R[regMemNum] = regMemVal;    //storing the value to the register #
     }
