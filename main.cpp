@@ -170,7 +170,7 @@ void RegMemCodeReading(vector<string> str){
                         cout << retStr << endl;
                         break;
                     case sltFunCode:
-                        cout << "R-Type Shift Logic Left function" << endl;
+                        cout << "R-Type Set Less Than function" << endl;
                         break;
                 }
                 break;
