@@ -71,10 +71,10 @@ int main()
     for(vector<string>::iterator it = str.begin(); it != str.end(); ++it){
         cout << *it << endl;
     }
-
+    inFile.close();
     RegMemCodeReading(str);
 
-    inFile.close();
+
 
     return 0;
 }
@@ -152,7 +152,7 @@ void RegMemCodeReading(vector<string> str){
         tempStr = str[i];
         oppStr = tempStr.substr(0,6);   //reading the  1st 6 bit oppcode
         opCdInt = stoi(oppStr,nullptr,2);
-        funStr = tempStr.substr(25,31);
+        funStr = tempStr.substr(26, 6); //reading last 6 bits - positions 26-31 inclusive
         funcodeint = stoi(funStr,nullptr,2);
         string retStr;
         switch(opCdInt){
@@ -166,6 +166,8 @@ void RegMemCodeReading(vector<string> str){
                         break;
                     case subFunCode:
                         cout << "R-Type Sub function" << endl;
+                        retStr = OpCodeSub(tempStr, i, cycleNum, instrNum);
+                        cout << retStr << endl;
                         break;
                     case sltFunCode:
                         cout << "R-Type Shift Logic Left function" << endl;
